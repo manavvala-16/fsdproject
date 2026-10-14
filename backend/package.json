@@ -1,0 +1,20 @@
+{
+  "name": "cinevault-backend",
+  "version": "1.0.0",
+  "description": "CineVault API - Backend for Personalized Film Discovery & Curation Platform",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node scripts/initDb.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.12.0"
+  }
+}
