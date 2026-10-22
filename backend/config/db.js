@@ -3,6 +3,12 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 
+// Set DB_SSL_CA to the database provider's CA certificate (PEM) to enable
+// certificate-verified TLS for hosted MySQL. Leave unset for local MySQL.
+const sslConfig = process.env.DB_SSL_CA
+  ? { ca: process.env.DB_SSL_CA.replace(/\\n/g, '\n'), rejectUnauthorized: true }
+  : undefined;
+
 // Default configuration with environment variables fallback
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
@@ -10,6 +16,7 @@ const dbConfig = {
   password: process.env.DB_PASSWORD !== undefined ? process.env.DB_PASSWORD : '',
   database: process.env.DB_NAME || 'cinevault',
   port: parseInt(process.env.DB_PORT || '3306', 10),
+  ...(sslConfig ? { ssl: sslConfig } : {}),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -65,6 +72,7 @@ async function initializeSchema() {
       user: dbConfig.user,
       password: dbConfig.password,
       port: dbConfig.port,
+      ...(sslConfig ? { ssl: sslConfig } : {}),
       multipleStatements: true
     });
     
