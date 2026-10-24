@@ -6,10 +6,10 @@ const HeroSection = () => {
 
   // Sample curated films showcase for cinematic atmosphere
   const featuredFilms = [
-    { title: 'Inception', year: 2010, director: 'Christopher Nolan', genre: 'Sci-Fi / Thriller', rating: '8.8', poster: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600' },
-    { title: 'The Dark Knight', year: 2008, director: 'Christopher Nolan', genre: 'Action / Crime', rating: '9.0', poster: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600' },
-    { title: 'Parasite', year: 2019, director: 'Bong Joon-ho', genre: 'Drama / Thriller', rating: '8.5', poster: 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?w=600' },
-    { title: 'Dune', year: 2021, director: 'Denis Villeneuve', genre: 'Sci-Fi / Adventure', rating: '8.0', poster: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600' },
+    { title: 'Inception', year: 2010, director: 'Christopher Nolan', genre: 'Sci-Fi / Thriller', rating: '8.8', poster: 'https://image.tmdb.org/t/p/w500/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg' },
+    { title: 'The Dark Knight', year: 2008, director: 'Christopher Nolan', genre: 'Action / Crime', rating: '9.0', poster: 'https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg' },
+    { title: 'Parasite', year: 2019, director: 'Bong Joon-ho', genre: 'Drama / Thriller', rating: '8.5', poster: 'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg' },
+    { title: 'Dune', year: 2021, director: 'Denis Villeneuve', genre: 'Sci-Fi / Adventure', rating: '8.0', poster: 'https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg' },
   ];
 
   return (
