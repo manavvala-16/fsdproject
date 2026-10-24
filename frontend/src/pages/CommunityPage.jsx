@@ -63,37 +63,28 @@ const CommunityPage = () => {
   };
 
   return (
-    <div className="d-flex flex-column min-vh-100 bg-dark text-light">
+    <div className="d-flex flex-column min-vh-100">
       <Navbar currentPath="#/community" />
 
       <main className="flex-grow-1 py-5">
         <div className="container">
           {/* Header */}
           <div className="text-center mb-5">
-            <div
-              className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3"
-              style={{ background: 'rgba(138, 43, 226, 0.15)', border: '1px solid rgba(138, 43, 226, 0.4)' }}
-            >
-              <i className="bi bi-people-fill text-purple-light"></i>
-              <span className="small fw-semibold text-purple-light">CineVault Community</span>
-            </div>
-            <h1 className="display-5 fw-bold text-white mb-3">Connect With Fellow Cinephiles</h1>
-            <p className="text-secondary lead mx-auto" style={{ maxWidth: '640px' }}>
-              Explore hand-crafted film collections, discover fellow film enthusiasts, and draw inspiration from what the community is watching.
+            <h2 className="fw-semibold text-white mb-2">Community</h2>
+            <p className="text-secondary small mx-auto mb-0" style={{ maxWidth: '540px' }}>
+              Explore hand-crafted film collections, discover fellow film enthusiasts, and share cinema inspiration.
             </p>
           </div>
 
           {loading ? (
-            <LoadingSpinner message="Discovering CineVault community..." />
+            <LoadingSpinner message="Loading community..." />
           ) : (
             <>
               {/* SECTION 1: Suggested Members */}
               <section className="mb-5">
-                <div className="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom border-secondary border-opacity-25">
+                <div className="d-flex align-items-center justify-content-between mb-3 pb-2" style={{ borderBottom: '1px solid var(--cv-border-subtle)' }}>
                   <div>
-                    <h3 className="fw-bold text-white mb-1">
-                      <i className="bi bi-person-stars text-purple-light me-2"></i>Curators & Film Enthusiasts
-                    </h3>
+                    <h5 className="fw-semibold text-white mb-1">Curators & Members</h5>
                     <p className="text-secondary small mb-0">Follow other members to discover movies through their taste</p>
                   </div>
                 </div>
@@ -101,14 +92,14 @@ const CommunityPage = () => {
                 {data.members.length === 0 ? (
                   <EmptyState
                     icon="bi-people"
-                    title="No Curators Found"
+                    title="No curators found"
                     subtitle="Be the first to invite friends to CineVault and grow the film community."
                   />
                 ) : (
-                  <div className="row g-4">
+                  <div className="row g-3 g-md-4">
                     {data.members.map(member => (
-                      <div key={member.id} className="col-md-6 col-lg-3">
-                        <div className="glass-card p-4 text-center h-100 d-flex flex-column justify-content-between hover-scale">
+                      <div key={member.id} className="col-sm-6 col-lg-3">
+                        <div className="glass-card cv-card-interactive p-4 text-center h-100 d-flex flex-column justify-content-between">
                           <div>
                             {/* Avatar */}
                             <a
@@ -116,11 +107,11 @@ const CommunityPage = () => {
                               className="text-decoration-none d-inline-block mb-3"
                             >
                               <div
-                                className="rounded-circle bg-purple-gradient text-white d-inline-flex align-items-center justify-content-center fw-bold fs-3 shadow"
+                                className="rounded-circle text-white d-inline-flex align-items-center justify-content-center fw-semibold fs-4"
                                 style={{
-                                  width: '72px',
-                                  height: '72px',
-                                  border: '2px solid rgba(168, 85, 247, 0.5)'
+                                  width: '56px',
+                                  height: '56px',
+                                  backgroundColor: 'var(--cv-purple)'
                                 }}
                               >
                                 {member.name?.charAt(0).toUpperCase() || 'U'}
@@ -128,37 +119,33 @@ const CommunityPage = () => {
                             </a>
 
                             {/* Name & Badge */}
-                            <h5 className="fw-bold text-white mb-1 text-truncate">
-                              <a href={`#/users/${member.id}`} className="text-white text-decoration-none hover-purple">
+                            <h6 className="fw-semibold text-white mb-1 text-truncate">
+                              <a href={`#/users/${member.id}`} className="text-white text-decoration-none">
                                 {member.name}
                               </a>
-                            </h5>
+                            </h6>
 
-                            <div className="mb-3">
+                            <div className="mb-2">
                               {member.role === 'admin' ? (
-                                <span className="badge bg-warning text-dark px-2 py-0 small fw-bold">STAFF</span>
+                                <span className="badge bg-warning text-dark px-2 py-0 small fw-medium" style={{ fontSize: '0.68rem' }}>STAFF</span>
                               ) : (
-                                <span className="badge bg-purple-subtle text-purple-light border border-purple-subtle px-2 py-0 small">CURATOR</span>
+                                <span className="badge bg-purple-subtle text-purple-light px-2 py-0 small" style={{ fontSize: '0.68rem' }}>MEMBER</span>
                               )}
                             </div>
 
                             {/* Stats */}
-                            <div className="d-flex align-items-center justify-content-center gap-3 text-secondary small mb-4">
-                              <div>
-                                <span className="fw-bold text-white">{member.followersCount}</span> followers
-                              </div>
+                            <div className="d-flex align-items-center justify-content-center gap-2 text-secondary small mb-3" style={{ fontSize: '0.78rem' }}>
+                              <span>{member.followersCount} followers</span>
                               <span>•</span>
-                              <div>
-                                <span className="fw-bold text-white">{member.publicCollectionsCount}</span> collections
-                              </div>
+                              <span>{member.publicCollectionsCount} collections</span>
                             </div>
                           </div>
 
                           {/* Follow Button */}
                           <div>
                             <button
-                              className={`btn w-100 py-2 btn-sm fw-semibold d-flex align-items-center justify-content-center gap-1 ${
-                                member.isFollowing ? 'btn-outline-secondary text-light' : 'btn-cv-primary'
+                              className={`btn w-100 py-1 btn-sm ${
+                                member.isFollowing ? 'btn-cv-outline' : 'btn-cv-primary'
                               }`}
                               onClick={() => handleFollowToggle(member.id, member.isFollowing)}
                               disabled={followLoadingId === member.id}
@@ -166,13 +153,9 @@ const CommunityPage = () => {
                               {followLoadingId === member.id ? (
                                 <span className="spinner-border spinner-border-sm" role="status"></span>
                               ) : member.isFollowing ? (
-                                <>
-                                  <i className="bi bi-person-check-fill text-purple-light"></i> Following
-                                </>
+                                'Following'
                               ) : (
-                                <>
-                                  <i className="bi bi-person-plus-fill"></i> Follow
-                                </>
+                                'Follow'
                               )}
                             </button>
                           </div>
@@ -184,63 +167,61 @@ const CommunityPage = () => {
               </section>
 
               {/* SECTION 2: Popular & Recent Public Collections */}
-              <section className="pt-3">
-                <div className="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom border-secondary border-opacity-25">
+              <section className="pt-2">
+                <div className="d-flex align-items-center justify-content-between mb-3 pb-2" style={{ borderBottom: '1px solid var(--cv-border-subtle)' }}>
                   <div>
-                    <h3 className="fw-bold text-white mb-1">
-                      <i className="bi bi-collection-play-fill text-warning me-2"></i>Community Collections
-                    </h3>
-                    <p className="text-secondary small mb-0">Themed movie collections shared publicly by CineVault members</p>
+                    <h5 className="fw-semibold text-white mb-1">Community Collections</h5>
+                    <p className="text-secondary small mb-0">Themed movie shelves shared publicly by CineVault members</p>
                   </div>
                 </div>
 
                 {data.collections.length === 0 ? (
                   <EmptyState
                     icon="bi-collection-play"
-                    title="No Public Collections Yet"
-                    subtitle="Create your own collection and make it public to inspire other cinephiles."
+                    title="No public collections yet"
+                    subtitle="Create your own collection and make it public to share with the community."
                     actionLabel="Create Collection"
                     actionHref="#/collections"
                   />
                 ) : (
-                  <div className="row g-4">
+                  <div className="row g-3 g-md-4">
                     {data.collections.map(col => (
                       <div key={col.id} className="col-md-6 col-lg-4">
-                        <div className="glass-card h-100 p-4 d-flex flex-column justify-content-between position-relative hover-scale">
+                        <div className="glass-card cv-card-interactive h-100 p-4 d-flex flex-column justify-content-between position-relative">
                           <div>
                             <div className="d-flex align-items-center justify-content-between mb-3">
                               <a
                                 href={`#/users/${col.userId}`}
-                                className="text-decoration-none small text-secondary d-flex align-items-center gap-2 hover-purple"
+                                className="text-decoration-none small text-secondary d-flex align-items-center gap-2"
                               >
                                 <div
-                                  className="rounded-circle bg-purple-gradient text-white d-flex align-items-center justify-content-center fw-bold"
-                                  style={{ width: '24px', height: '24px', fontSize: '0.75rem' }}
+                                  className="rounded-circle text-white d-flex align-items-center justify-content-center fw-medium"
+                                  style={{ width: '22px', height: '22px', fontSize: '0.7rem', backgroundColor: 'var(--cv-purple)' }}
                                 >
                                   {col.ownerName?.charAt(0).toUpperCase() || 'U'}
                                 </div>
-                                <span className="text-light fw-medium">{col.ownerName}</span>
+                                <span className="text-secondary fw-medium">{col.ownerName}</span>
                               </a>
-                              <span className="badge bg-dark border border-secondary text-secondary small">
+                              <span className="badge bg-purple-subtle text-purple-light small" style={{ fontSize: '0.7rem' }}>
                                 {col.movieCount} {col.movieCount === 1 ? 'film' : 'films'}
                               </span>
                             </div>
 
-                            <h4 className="fw-bold text-white mb-2">{col.name}</h4>
-                            <p className="text-secondary small mb-4" style={{ minHeight: '38px' }}>
+                            <h5 className="fw-semibold text-white mb-1">{col.name}</h5>
+                            <p className="text-secondary small mb-3" style={{ minHeight: '36px', lineHeight: '1.5' }}>
                               {col.description || 'Curated film collection by community member.'}
                             </p>
 
                             {/* Movie Posters Preview */}
                             {col.movies && col.movies.length > 0 && (
-                              <div className="d-flex align-items-center gap-2 mb-4 overflow-hidden">
+                              <div className="d-flex align-items-center gap-2 mb-3 overflow-hidden">
                                 {col.movies.map((m, idx) => (
                                   <img
                                     key={idx}
                                     src={m.poster_url || 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300'}
                                     alt={m.title}
-                                    className="rounded shadow-sm"
-                                    style={{ width: '48px', height: '68px', objectFit: 'cover' }}
+                                    className="rounded-1"
+                                    style={{ width: '48px', height: '68px', objectFit: 'cover', border: '1px solid var(--cv-border-subtle)' }}
                                   />
                                 ))}
                               </div>
@@ -249,10 +230,9 @@ const CommunityPage = () => {
 
                           <a
                             href={`#/collections/${col.id}`}
-                            className="btn btn-cv-outline w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+                            className="btn btn-cv-outline btn-sm w-100 py-1"
                           >
-                            <span>Explore Collection</span>
-                            <i className="bi bi-arrow-right"></i>
+                            View Collection
                           </a>
                         </div>
                       </div>

@@ -55,11 +55,9 @@ const WatchlistPageContent = () => {
       <Navbar currentPath="#/watchlist" />
       <main className="flex-grow-1 py-5">
         <div className="container">
-          <div className="mb-5">
-            <h2 className="fw-bold text-white mb-1">
-              <i className="bi bi-bookmark-heart text-purple-gradient me-2"></i>My Watchlist
-            </h2>
-            <p className="text-secondary mb-0">Films you've saved for later viewing</p>
+          <div className="mb-4">
+            <h3 className="fw-semibold text-white mb-1">My Watchlist</h3>
+            <p className="text-secondary small mb-0">{movies.length > 0 ? `${movies.length} film${movies.length > 1 ? 's' : ''} saved` : 'Films you\'ve saved for later viewing'}</p>
           </div>
 
           {loading && <LoadingSpinner message="Loading your watchlist..." />}
@@ -81,7 +79,6 @@ const WatchlistPageContent = () => {
           )}
           {!loading && !error && movies.length > 0 && (
             <>
-              <p className="text-secondary small mb-4">{movies.length} film{movies.length > 1 ? 's' : ''} saved</p>
               <MovieGrid
                 movies={movies}
                 onSelect={movie => { window.location.hash = `#/movies/${movie.id}`; }}

@@ -51,11 +51,9 @@ const WatchHistoryPageContent = () => {
       <Navbar currentPath="#/history" />
       <main className="flex-grow-1 py-5">
         <div className="container">
-          <div className="mb-5">
-            <h2 className="fw-bold text-white mb-1">
-              <i className="bi bi-clock-history text-purple-gradient me-2"></i>Viewing History
-            </h2>
-            <p className="text-secondary mb-0">Every film you've marked as watched</p>
+          <div className="mb-4">
+            <h3 className="fw-semibold text-white mb-1">Viewing History</h3>
+            <p className="text-secondary small mb-0">{movies.length > 0 ? `${movies.length} film${movies.length > 1 ? 's' : ''} watched` : 'Every film you\'ve marked as watched'}</p>
           </div>
 
           {loading && <LoadingSpinner message="Loading your viewing history..." />}
@@ -77,7 +75,6 @@ const WatchHistoryPageContent = () => {
           )}
           {!loading && !error && movies.length > 0 && (
             <>
-              <p className="text-secondary small mb-4">{movies.length} film{movies.length > 1 ? 's' : ''} watched</p>
               <div className="row g-3 g-md-4">
                 {movies.map(movie => {
                   const genres = Array.isArray(movie.genres)

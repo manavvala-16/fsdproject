@@ -132,7 +132,7 @@ const DiscoverPage = () => {
   const getActionSlot = (movie) => (
     <div className="d-flex gap-2">
       <button
-        className={`btn btn-sm flex-grow-1 fw-semibold d-flex align-items-center justify-content-center gap-1 ${watchlistIds.has(movie.id) ? 'btn-cv-primary' : 'btn-cv-outline'}`}
+        className={`btn btn-sm flex-grow-1 d-flex align-items-center justify-content-center gap-1 ${watchlistIds.has(movie.id) ? 'btn-cv-primary' : 'btn-cv-outline'}`}
         onClick={e => { e.stopPropagation(); handleWatchlistToggle(movie); }}
         disabled={actionLoading[`wl_${movie.id}`]}
         title={watchlistIds.has(movie.id) ? 'Remove from Watchlist' : 'Add to Watchlist'}
@@ -140,7 +140,7 @@ const DiscoverPage = () => {
       >
         {actionLoading[`wl_${movie.id}`]
           ? <span className="spinner-border spinner-border-sm" />
-          : <><i className={`bi ${watchlistIds.has(movie.id) ? 'bi-bookmark-fill' : 'bi-bookmark'}`}></i></>
+          : <i className={`bi ${watchlistIds.has(movie.id) ? 'bi-bookmark-fill' : 'bi-bookmark'}`}></i>
         }
         <span>{watchlistIds.has(movie.id) ? 'Saved' : 'Save'}</span>
       </button>
@@ -153,7 +153,7 @@ const DiscoverPage = () => {
       >
         {actionLoading[`wh_${movie.id}`]
           ? <span className="spinner-border spinner-border-sm" />
-          : <i className={`bi ${watchedIds.has(movie.id) ? 'bi-eye-fill' : 'bi-eye'}`}></i>
+          : <i className={`bi ${watchedIds.has(movie.id) ? 'bi-check-lg' : 'bi-eye'}`}></i>
         }
       </button>
     </div>
@@ -164,32 +164,30 @@ const DiscoverPage = () => {
   return (
     <div className="d-flex flex-column min-vh-100">
       <Navbar currentPath="#/discover" />
-      <main className="flex-grow-1 py-5">
+      <main className="flex-grow-1 py-4">
         <div className="container">
           {/* Page Header */}
-          <div className="mb-5">
-            <h2 className="fw-bold text-white mb-1">
-              <i className="bi bi-compass text-purple-gradient me-2"></i>Discover Films
-            </h2>
-            <p className="text-secondary mb-0">Browse our curated collection of critically acclaimed cinema</p>
+          <div className="mb-4">
+            <h3 className="fw-semibold text-white mb-1">Discover Films</h3>
+            <p className="text-secondary small mb-0">Browse and filter curated cinema from around the world</p>
           </div>
 
           {/* Search & Filters Bar */}
-          <div className="glass-card p-3 p-md-4 mb-5">
+          <div className="glass-card p-3 p-md-4 mb-4">
             {/* Search Bar */}
             <form onSubmit={handleSearchSubmit} className="mb-3">
-              <div className="input-group input-group-lg">
-                <span className="input-group-text bg-dark border-secondary border-opacity-50 text-secondary">
+              <div className="input-group">
+                <span className="input-group-text">
                   <i className="bi bi-search"></i>
                 </span>
                 <input
                   type="text"
-                  className="form-control bg-dark text-light border-secondary border-opacity-50"
+                  className="form-control"
                   placeholder="Search by title, description..."
                   value={searchInput}
                   onChange={e => setSearchInput(e.target.value)}
                 />
-                <button type="submit" className="btn btn-cv-primary px-4 fw-semibold">
+                <button type="submit" className="btn btn-cv-primary px-4 fw-medium">
                   Search
                 </button>
               </div>
@@ -198,9 +196,9 @@ const DiscoverPage = () => {
             {/* Filter Row */}
             <div className="row g-2 align-items-end">
               <div className="col-6 col-md-3">
-                <label className="form-label text-secondary small fw-semibold mb-1">Genre</label>
+                <label className="form-label text-secondary small mb-1">Genre</label>
                 <select
-                  className="form-select bg-dark text-light border-secondary border-opacity-50 small"
+                  className="form-select small"
                   value={selectedGenre}
                   onChange={handleFilterChange(setSelectedGenre)}
                 >
@@ -211,9 +209,9 @@ const DiscoverPage = () => {
                 </select>
               </div>
               <div className="col-6 col-md-3">
-                <label className="form-label text-secondary small fw-semibold mb-1">Language</label>
+                <label className="form-label text-secondary small mb-1">Language</label>
                 <select
-                  className="form-select bg-dark text-light border-secondary border-opacity-50 small"
+                  className="form-select small"
                   value={selectedLanguage}
                   onChange={handleFilterChange(setSelectedLanguage)}
                 >
@@ -224,10 +222,10 @@ const DiscoverPage = () => {
                 </select>
               </div>
               <div className="col-6 col-md-2">
-                <label className="form-label text-secondary small fw-semibold mb-1">Year</label>
+                <label className="form-label text-secondary small mb-1">Year</label>
                 <input
                   type="number"
-                  className="form-control bg-dark text-light border-secondary border-opacity-50 small"
+                  className="form-control small"
                   placeholder="e.g. 2023"
                   value={selectedYear}
                   onChange={handleFilterChange(setSelectedYear)}
@@ -235,9 +233,9 @@ const DiscoverPage = () => {
                 />
               </div>
               <div className="col-6 col-md-3">
-                <label className="form-label text-secondary small fw-semibold mb-1">Sort By</label>
+                <label className="form-label text-secondary small mb-1">Sort By</label>
                 <select
-                  className="form-select bg-dark text-light border-secondary border-opacity-50 small"
+                  className="form-select small"
                   value={sort}
                   onChange={handleFilterChange(setSort)}
                 >
@@ -249,12 +247,12 @@ const DiscoverPage = () => {
               {hasActiveFilters && (
                 <div className="col-12 col-md-1 d-flex align-items-end">
                   <button
-                    className="btn btn-outline-secondary w-100 py-2"
+                    className="btn btn-cv-outline w-100 py-2"
                     onClick={handleClearFilters}
-                    title="Clear all filters"
+                    title="Reset filters"
                     style={{ fontSize: '0.82rem' }}
                   >
-                    <i className="bi bi-x-lg"></i>
+                    Reset
                   </button>
                 </div>
               )}

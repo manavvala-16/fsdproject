@@ -36,7 +36,7 @@ const ProfilePageContent = () => {
   const publicCollections = collections.filter(c => c.isPublic);
 
   return (
-    <div className="d-flex flex-column min-vh-100 bg-dark text-light">
+    <div className="d-flex flex-column min-vh-100">
       <Navbar currentPath="#/profile" />
 
       <main className="flex-grow-1 py-5">
@@ -44,141 +44,115 @@ const ProfilePageContent = () => {
           <div className="row justify-content-center">
             <div className="col-lg-10">
               {/* Profile Card */}
-              <div className="glass-card p-4 p-md-5 mb-4 position-relative overflow-hidden">
-                <div
-                  className="position-absolute"
-                  style={{
-                    top: '-40%',
-                    right: '-10%',
-                    width: '320px',
-                    height: '320px',
-                    background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%)',
-                    pointerEvents: 'none'
-                  }}
-                />
-
+              <div className="glass-card p-4 p-md-5 mb-4">
                 <div className="d-flex flex-column flex-md-row align-items-center gap-4 text-center text-md-start">
                   <div
-                    className="rounded-circle bg-purple-gradient text-white d-flex align-items-center justify-content-center fw-bold fs-1 shadow-lg flex-shrink-0"
-                    style={{ width: '96px', height: '96px', border: '3px solid rgba(168, 85, 247, 0.5)' }}
+                    className="rounded-circle text-white d-flex align-items-center justify-content-center fw-semibold fs-2 flex-shrink-0"
+                    style={{ width: '80px', height: '80px', backgroundColor: 'var(--cv-purple)' }}
                   >
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
 
                   <div className="flex-grow-1">
                     <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1 flex-wrap">
-                      <h2 className="fw-bold text-white mb-0">{user?.name}</h2>
+                      <h3 className="fw-semibold text-white mb-0">{user?.name}</h3>
                       {isAdmin ? (
-                        <span className="badge bg-warning text-dark px-2 py-1 small fw-bold">ADMINISTRATOR</span>
+                        <span className="badge bg-warning text-dark px-2 py-0 small fw-medium" style={{ fontSize: '0.68rem' }}>ADMIN</span>
                       ) : (
-                        <span className="badge bg-purple-subtle text-purple-light border border-purple-subtle px-2 py-1 small">CINEPHILE MEMBER</span>
+                        <span className="badge bg-purple-subtle text-purple-light px-2 py-0 small" style={{ fontSize: '0.68rem' }}>MEMBER</span>
                       )}
                     </div>
-                    <p className="text-secondary mb-3">{user?.email}</p>
+                    <p className="text-secondary small mb-3">{user?.email}</p>
 
                     {/* Social Counters */}
                     <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-4">
                       <div>
-                        <span className="fw-bold fs-5 text-white me-1">{socialStats.followersCount}</span>
+                        <span className="fw-semibold fs-5 text-white me-1">{socialStats.followersCount}</span>
                         <span className="text-secondary small">Followers</span>
                       </div>
-                      <div className="border-start border-secondary opacity-25" style={{ height: '24px' }}></div>
+                      <div style={{ height: '18px', width: '1px', backgroundColor: 'var(--cv-border-subtle)' }}></div>
                       <div>
-                        <span className="fw-bold fs-5 text-white me-1">{socialStats.followingCount}</span>
+                        <span className="fw-semibold fs-5 text-white me-1">{socialStats.followingCount}</span>
                         <span className="text-secondary small">Following</span>
                       </div>
-                      <div className="border-start border-secondary opacity-25" style={{ height: '24px' }}></div>
+                      <div style={{ height: '18px', width: '1px', backgroundColor: 'var(--cv-border-subtle)' }}></div>
                       <div>
-                        <span className="fw-bold fs-5 text-purple-light me-1">{collections.length}</span>
-                        <span className="text-secondary small">Total Collections</span>
+                        <span className="fw-semibold fs-5 text-white me-1">{collections.length}</span>
+                        <span className="text-secondary small">Collections</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="d-flex flex-column gap-2">
-                    <a href={`#/users/${user?.id}`} className="btn btn-cv-outline py-2 px-3 d-flex align-items-center justify-content-center gap-2">
-                      <i className="bi bi-eye"></i> View Public Profile
+                    <a href={`#/users/${user?.id}`} className="btn btn-cv-outline btn-sm py-1 px-3">
+                      Public View
                     </a>
-                    <button className="btn btn-outline-danger py-2 px-3 d-flex align-items-center justify-content-center gap-2" onClick={logout}>
-                      <i className="bi bi-box-arrow-right"></i> Sign Out
+                    <button className="btn btn-outline-danger btn-sm py-1 px-3" onClick={logout}>
+                      Sign Out
                     </button>
                   </div>
                 </div>
               </div>
 
               {/* Quick Navigation Cards */}
-              <div className="row g-3 mb-5">
-                <div className="col-sm-6 col-lg-3">
-                  <a href="#/dna" className="glass-card p-3 text-center text-decoration-none d-block hover-scale">
-                    <div className="text-purple-light fs-3 mb-1">
-                      <i className="bi bi-fingerprint"></i>
-                    </div>
-                    <h5 className="fw-bold text-white mb-1">Movie DNA</h5>
-                    <span className="small text-secondary">View Taste Profile</span>
+              <div className="row g-3 mb-4">
+                <div className="col-6 col-md-3">
+                  <a href="#/dna" className="glass-card cv-card-interactive p-3 text-center text-decoration-none d-block">
+                    <h6 className="fw-semibold text-white mb-1">Movie DNA</h6>
+                    <span className="small text-secondary" style={{ fontSize: '0.75rem' }}>Taste Profile</span>
                   </a>
                 </div>
-                <div className="col-sm-6 col-lg-3">
-                  <a href="#/recommendations" className="glass-card p-3 text-center text-decoration-none d-block hover-scale">
-                    <div className="text-warning fs-3 mb-1">
-                      <i className="bi bi-stars"></i>
-                    </div>
-                    <h5 className="fw-bold text-white mb-1">Recommended</h5>
-                    <span className="small text-secondary">Personalized Films</span>
+                <div className="col-6 col-md-3">
+                  <a href="#/recommendations" className="glass-card cv-card-interactive p-3 text-center text-decoration-none d-block">
+                    <h6 className="fw-semibold text-white mb-1">For You</h6>
+                    <span className="small text-secondary" style={{ fontSize: '0.75rem' }}>Recommendations</span>
                   </a>
                 </div>
-                <div className="col-sm-6 col-lg-3">
-                  <a href="#/watchlist" className="glass-card p-3 text-center text-decoration-none d-block hover-scale">
-                    <div className="text-info fs-3 mb-1">
-                      <i className="bi bi-bookmark-heart"></i>
-                    </div>
-                    <h5 className="fw-bold text-white mb-1">Watchlist</h5>
-                    <span className="small text-secondary">Saved Cinema</span>
+                <div className="col-6 col-md-3">
+                  <a href="#/watchlist" className="glass-card cv-card-interactive p-3 text-center text-decoration-none d-block">
+                    <h6 className="fw-semibold text-white mb-1">Watchlist</h6>
+                    <span className="small text-secondary" style={{ fontSize: '0.75rem' }}>Saved Cinema</span>
                   </a>
                 </div>
-                <div className="col-sm-6 col-lg-3">
-                  <a href="#/history" className="glass-card p-3 text-center text-decoration-none d-block hover-scale">
-                    <div className="text-success fs-3 mb-1">
-                      <i className="bi bi-clock-history"></i>
-                    </div>
-                    <h5 className="fw-bold text-white mb-1">History</h5>
-                    <span className="small text-secondary">Logged Films</span>
+                <div className="col-6 col-md-3">
+                  <a href="#/history" className="glass-card cv-card-interactive p-3 text-center text-decoration-none d-block">
+                    <h6 className="fw-semibold text-white mb-1">History</h6>
+                    <span className="small text-secondary" style={{ fontSize: '0.75rem' }}>Logged Films</span>
                   </a>
                 </div>
               </div>
 
               {/* My Public Collections Section */}
-              <div className="glass-card p-4 p-md-5">
-                <div className="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom border-secondary border-opacity-25 flex-wrap gap-2">
+              <div className="glass-card p-4 p-md-4">
+                <div className="d-flex align-items-center justify-content-between mb-3 pb-2 flex-wrap gap-2" style={{ borderBottom: '1px solid var(--cv-border-subtle)' }}>
                   <div>
-                    <h4 className="fw-bold text-white mb-1">
-                      <i className="bi bi-collection-play-fill text-purple-light me-2"></i>My Public Collections
-                    </h4>
-                    <p className="text-secondary small mb-0">Collections visible to other CineVault community members</p>
+                    <h5 className="fw-semibold text-white mb-0">My Public Collections</h5>
+                    <p className="text-secondary small mb-0">Collections shared publicly with the CineVault community</p>
                   </div>
-                  <a href="#/collections" className="btn btn-cv-primary btn-sm px-3 py-2 d-inline-flex align-items-center gap-2">
-                    <i className="bi bi-folder-plus"></i> Manage All Collections
+                  <a href="#/collections" className="btn btn-cv-outline btn-sm px-3 py-1">
+                    Manage Collections
                   </a>
                 </div>
 
                 {publicCollections.length === 0 ? (
-                  <div className="text-center py-4 text-secondary">
+                  <div className="text-center py-4 text-secondary small">
                     <p className="mb-2">You don't have any public collections yet.</p>
-                    <a href="#/collections" className="text-purple-light small fw-semibold text-decoration-none">
-                      Go to My Collections to create one or set existing ones to Public →
+                    <a href="#/collections" className="text-purple-light fw-medium text-decoration-none">
+                      Go to collections to create or share one
                     </a>
                   </div>
                 ) : (
                   <div className="row g-3">
                     {publicCollections.map(col => (
                       <div key={col.id} className="col-md-6">
-                        <div className="glass-card p-3 d-flex align-items-center justify-content-between hover-scale">
+                        <div className="glass-card cv-card-interactive p-3 d-flex align-items-center justify-content-between">
                           <div>
-                            <h6 className="fw-bold text-white mb-1">{col.name}</h6>
+                            <h6 className="fw-semibold text-white mb-1">{col.name}</h6>
                             <span className="text-secondary small">
-                              {col.movieCount || col.movies?.length || 0} films • <span className="text-success">Public</span>
+                              {col.movieCount || col.movies?.length || 0} films • Public
                             </span>
                           </div>
-                          <a href={`#/collections/${col.id}`} className="btn btn-cv-outline btn-sm px-3">
+                          <a href={`#/collections/${col.id}`} className="btn btn-cv-outline btn-sm px-3 py-1">
                             View
                           </a>
                         </div>

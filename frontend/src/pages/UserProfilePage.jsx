@@ -62,7 +62,7 @@ const UserProfilePage = ({ userId }) => {
 
   if (loading) {
     return (
-      <div className="d-flex flex-column min-vh-100 bg-dark text-light">
+      <div className="d-flex flex-column min-vh-100">
         <Navbar />
         <main className="flex-grow-1 d-flex align-items-center justify-content-center py-5">
           <LoadingSpinner message="Loading member profile..." />
@@ -74,7 +74,7 @@ const UserProfilePage = ({ userId }) => {
 
   if (errorMsg || !profile) {
     return (
-      <div className="d-flex flex-column min-vh-100 bg-dark text-light">
+      <div className="d-flex flex-column min-vh-100">
         <Navbar />
         <main className="flex-grow-1 py-5">
           <div className="container">
@@ -95,7 +95,7 @@ const UserProfilePage = ({ userId }) => {
   const isSelf = currentUser && currentUser.id === profile.id;
 
   return (
-    <div className="d-flex flex-column min-vh-100 bg-dark text-light">
+    <div className="d-flex flex-column min-vh-100">
       <Navbar />
 
       <main className="flex-grow-1 py-5">
@@ -108,27 +108,15 @@ const UserProfilePage = ({ userId }) => {
           </div>
 
           {/* Member Profile Header Card */}
-          <div className="glass-card p-4 p-md-5 mb-5 position-relative overflow-hidden">
-            <div
-              className="position-absolute"
-              style={{
-                top: '-40%',
-                right: '-10%',
-                width: '320px',
-                height: '320px',
-                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%)',
-                pointerEvents: 'none'
-              }}
-            />
-
+          <div className="glass-card p-4 p-md-5 mb-4">
             <div className="d-flex flex-column flex-md-row align-items-center gap-4 text-center text-md-start">
               {/* Avatar */}
               <div
-                className="rounded-circle bg-purple-gradient text-white d-flex align-items-center justify-content-center fw-bold fs-1 shadow-lg flex-shrink-0"
+                className="rounded-circle text-white d-flex align-items-center justify-content-center fw-semibold fs-2 flex-shrink-0"
                 style={{
-                  width: '104px',
-                  height: '104px',
-                  border: '3px solid rgba(168, 85, 247, 0.5)'
+                  width: '80px',
+                  height: '80px',
+                  backgroundColor: 'var(--cv-purple)'
                 }}
               >
                 {profile.name?.charAt(0).toUpperCase() || 'U'}
@@ -136,34 +124,34 @@ const UserProfilePage = ({ userId }) => {
 
               {/* User Info */}
               <div className="flex-grow-1">
-                <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2 flex-wrap">
-                  <h2 className="fw-bold text-white mb-0">{profile.name}</h2>
+                <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-1 flex-wrap">
+                  <h3 className="fw-semibold text-white mb-0">{profile.name}</h3>
                   {profile.role === 'admin' ? (
-                    <span className="badge bg-warning text-dark px-2 py-1 small fw-bold">STAFF / CURATOR</span>
+                    <span className="badge bg-warning text-dark px-2 py-0 small fw-medium" style={{ fontSize: '0.68rem' }}>STAFF</span>
                   ) : (
-                    <span className="badge bg-purple-subtle text-purple-light border border-purple-subtle px-2 py-1 small">CINEPHILE MEMBER</span>
+                    <span className="badge bg-purple-subtle text-purple-light px-2 py-0 small" style={{ fontSize: '0.68rem' }}>MEMBER</span>
                   )}
                 </div>
 
                 <p className="text-secondary small mb-3">
-                  <i className="bi bi-calendar3 me-1"></i> CineVault curator since {new Date(profile.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
+                  Member since {new Date(profile.createdAt || '2025-01-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
                 </p>
 
                 {/* Follower Stats */}
                 <div className="d-flex align-items-center justify-content-center justify-content-md-start gap-4">
                   <div>
-                    <span className="fw-bold fs-5 text-white me-1">{profile.followersCount}</span>
+                    <span className="fw-semibold fs-5 text-white me-1">{profile.followersCount}</span>
                     <span className="text-secondary small">Followers</span>
                   </div>
-                  <div className="border-start border-secondary opacity-25" style={{ height: '24px' }}></div>
+                  <div style={{ height: '18px', width: '1px', backgroundColor: 'var(--cv-border-subtle)' }}></div>
                   <div>
-                    <span className="fw-bold fs-5 text-white me-1">{profile.followingCount}</span>
+                    <span className="fw-semibold fs-5 text-white me-1">{profile.followingCount}</span>
                     <span className="text-secondary small">Following</span>
                   </div>
-                  <div className="border-start border-secondary opacity-25" style={{ height: '24px' }}></div>
+                  <div style={{ height: '18px', width: '1px', backgroundColor: 'var(--cv-border-subtle)' }}></div>
                   <div>
-                    <span className="fw-bold fs-5 text-purple-light me-1">{profile.collections?.length || 0}</span>
-                    <span className="text-secondary small">Public Collections</span>
+                    <span className="fw-semibold fs-5 text-white me-1">{profile.collections?.length || 0}</span>
+                    <span className="text-secondary small">Collections</span>
                   </div>
                 </div>
               </div>
@@ -171,27 +159,23 @@ const UserProfilePage = ({ userId }) => {
               {/* Action Button */}
               <div>
                 {isSelf ? (
-                  <a href="#/profile" className="btn btn-cv-outline px-4 py-2 d-inline-flex align-items-center gap-2">
-                    <i className="bi bi-gear"></i> Manage My Profile
+                  <a href="#/profile" className="btn btn-cv-outline btn-sm px-3 py-1">
+                    Manage Profile
                   </a>
                 ) : (
                   <button
-                    className={`btn px-4 py-2 fw-semibold d-inline-flex align-items-center gap-2 ${
-                      profile.isFollowing ? 'btn-outline-secondary text-light' : 'btn-cv-primary'
+                    className={`btn btn-sm px-3 py-1 ${
+                      profile.isFollowing ? 'btn-cv-outline' : 'btn-cv-primary'
                     }`}
                     onClick={handleFollowToggle}
                     disabled={actionLoading}
                   >
                     {actionLoading ? (
-                      <span className="spinner-border spinner-border-sm me-1" role="status"></span>
+                      <span className="spinner-border spinner-border-sm" role="status"></span>
                     ) : profile.isFollowing ? (
-                      <>
-                        <i className="bi bi-person-check-fill text-purple-light"></i> Following
-                      </>
+                      'Following'
                     ) : (
-                      <>
-                        <i className="bi bi-person-plus-fill"></i> Follow Curator
-                      </>
+                      'Follow'
                     )}
                   </button>
                 )}
@@ -200,30 +184,30 @@ const UserProfilePage = ({ userId }) => {
           </div>
 
           {/* Navigation Tabs */}
-          <div className="d-flex align-items-center gap-3 border-bottom border-secondary border-opacity-25 mb-4 pb-1">
+          <div className="d-flex align-items-center gap-3 mb-4" style={{ borderBottom: '1px solid var(--cv-border-subtle)' }}>
             <button
-              className={`btn btn-link text-decoration-none px-3 py-2 fw-semibold position-relative ${
-                activeTab === 'collections' ? 'text-purple-light' : 'text-secondary'
+              className={`btn btn-link text-decoration-none px-3 py-2 small fw-medium position-relative ${
+                activeTab === 'collections' ? 'text-white' : 'text-secondary'
               }`}
               onClick={() => setActiveTab('collections')}
               style={{
-                borderBottom: activeTab === 'collections' ? '2px solid #a855f7' : '2px solid transparent',
+                borderBottom: activeTab === 'collections' ? '2px solid var(--cv-purple)' : '2px solid transparent',
                 borderRadius: 0
               }}
             >
-              <i className="bi bi-collection-play me-2"></i>Public Collections ({profile.collections?.length || 0})
+              Public Collections ({profile.collections?.length || 0})
             </button>
             <button
-              className={`btn btn-link text-decoration-none px-3 py-2 fw-semibold position-relative ${
-                activeTab === 'activity' ? 'text-purple-light' : 'text-secondary'
+              className={`btn btn-link text-decoration-none px-3 py-2 small fw-medium position-relative ${
+                activeTab === 'activity' ? 'text-white' : 'text-secondary'
               }`}
               onClick={() => setActiveTab('activity')}
               style={{
-                borderBottom: activeTab === 'activity' ? '2px solid #a855f7' : '2px solid transparent',
+                borderBottom: activeTab === 'activity' ? '2px solid var(--cv-purple)' : '2px solid transparent',
                 borderRadius: 0
               }}
             >
-              <i className="bi bi-star me-2"></i>Recent Curation ({profile.recentActivity?.length || 0})
+              Recent Activity ({profile.recentActivity?.length || 0})
             </button>
           </div>
 

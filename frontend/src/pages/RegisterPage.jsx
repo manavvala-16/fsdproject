@@ -58,7 +58,7 @@ const RegisterPage = () => {
       } else {
         setError(response.message || 'Registration failed. Please try again.');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected network error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -72,28 +72,35 @@ const RegisterPage = () => {
       <main className="flex-grow-1 d-flex align-items-center justify-content-center py-5">
         <div className="container">
           <div className="row justify-content-center">
-            <div className="col-md-8 col-lg-6">
-              <div className="glass-card p-4 p-sm-5 position-relative">
+            <div className="col-md-7 col-lg-5">
+              <div className="glass-card p-4 p-sm-5">
                 {/* Header */}
                 <div className="text-center mb-4">
-                  <div className="d-inline-flex align-items-center justify-content-center rounded-circle p-3 mb-3" style={{ background: 'linear-gradient(135deg, #8a2be2 0%, #4c1d95 100%)', boxShadow: '0 0 20px rgba(138, 43, 226, 0.4)', width: '64px', height: '64px' }}>
-                    <i className="bi bi-person-plus-fill text-white fs-3"></i>
+                  <div
+                    className="d-inline-flex align-items-center justify-content-center rounded-2 mb-3"
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      backgroundColor: 'var(--cv-purple)'
+                    }}
+                  >
+                    <i className="bi bi-film text-white fs-5"></i>
                   </div>
-                  <h3 className="fw-bold text-white mb-1">Create CineVault Account</h3>
-                  <p className="text-secondary small">Join the personalized film discovery & curation platform</p>
+                  <h4 className="fw-semibold text-white mb-1">Create Account</h4>
+                  <p className="text-secondary small mb-0">Join CineVault to curate and discover films</p>
                 </div>
 
                 {/* Feedback Alerts */}
                 {error && (
-                  <div className="alert alert-danger border-danger-subtle bg-danger-subtle text-danger d-flex align-items-center gap-2 py-2 px-3 rounded-3 small mb-4">
-                    <i className="bi bi-exclamation-triangle-fill"></i>
+                  <div className="alert alert-danger border-danger-subtle bg-danger-subtle text-danger d-flex align-items-center gap-2 py-2 px-3 rounded-2 small mb-4">
+                    <i className="bi bi-exclamation-triangle"></i>
                     <span>{error}</span>
                   </div>
                 )}
 
                 {successMsg && (
-                  <div className="alert alert-success border-success-subtle bg-success-subtle text-success d-flex align-items-center gap-2 py-2 px-3 rounded-3 small mb-4">
-                    <i className="bi bi-check-circle-fill"></i>
+                  <div className="alert alert-success border-success-subtle bg-success-subtle text-success d-flex align-items-center gap-2 py-2 px-3 rounded-2 small mb-4">
+                    <i className="bi bi-check-circle"></i>
                     <span>{successMsg}</span>
                   </div>
                 )}
@@ -101,15 +108,15 @@ const RegisterPage = () => {
                 {/* Registration Form */}
                 <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label className="form-label text-secondary small fw-semibold">Full Name</label>
+                    <label className="form-label text-secondary small mb-1">Full Name</label>
                     <div className="input-group">
-                      <span className="input-group-text bg-dark border-secondary border-opacity-50 text-secondary">
+                      <span className="input-group-text">
                         <i className="bi bi-person"></i>
                       </span>
                       <input
                         type="text"
                         name="name"
-                        className="form-control bg-dark text-light border-secondary border-opacity-50"
+                        className="form-control"
                         placeholder="John Doe"
                         value={formData.name}
                         onChange={handleChange}
@@ -120,15 +127,15 @@ const RegisterPage = () => {
                   </div>
 
                   <div className="mb-3">
-                    <label className="form-label text-secondary small fw-semibold">Email Address</label>
+                    <label className="form-label text-secondary small mb-1">Email</label>
                     <div className="input-group">
-                      <span className="input-group-text bg-dark border-secondary border-opacity-50 text-secondary">
+                      <span className="input-group-text">
                         <i className="bi bi-envelope"></i>
                       </span>
                       <input
                         type="email"
                         name="email"
-                        className="form-control bg-dark text-light border-secondary border-opacity-50"
+                        className="form-control"
                         placeholder="you@example.com"
                         value={formData.email}
                         onChange={handleChange}
@@ -138,17 +145,17 @@ const RegisterPage = () => {
                     </div>
                   </div>
 
-                  <div className="row g-3 mb-4">
+                  <div className="row g-2 mb-4">
                     <div className="col-sm-6">
-                      <label className="form-label text-secondary small fw-semibold">Password</label>
+                      <label className="form-label text-secondary small mb-1">Password</label>
                       <div className="input-group">
-                        <span className="input-group-text bg-dark border-secondary border-opacity-50 text-secondary">
-                          <i className="bi bi-key"></i>
+                        <span className="input-group-text">
+                          <i className="bi bi-lock"></i>
                         </span>
                         <input
                           type="password"
                           name="password"
-                          className="form-control bg-dark text-light border-secondary border-opacity-50"
+                          className="form-control"
                           placeholder="••••••••"
                           value={formData.password}
                           onChange={handleChange}
@@ -158,15 +165,15 @@ const RegisterPage = () => {
                       </div>
                     </div>
                     <div className="col-sm-6">
-                      <label className="form-label text-secondary small fw-semibold">Confirm Password</label>
+                      <label className="form-label text-secondary small mb-1">Confirm</label>
                       <div className="input-group">
-                        <span className="input-group-text bg-dark border-secondary border-opacity-50 text-secondary">
+                        <span className="input-group-text">
                           <i className="bi bi-shield-check"></i>
                         </span>
                         <input
                           type="password"
                           name="confirmPassword"
-                          className="form-control bg-dark text-light border-secondary border-opacity-50"
+                          className="form-control"
                           placeholder="••••••••"
                           value={formData.confirmPassword}
                           onChange={handleChange}
@@ -179,28 +186,25 @@ const RegisterPage = () => {
 
                   <button
                     type="submit"
-                    className="btn btn-cv-primary w-100 py-2 d-flex align-items-center justify-content-center gap-2 fw-semibold"
+                    className="btn btn-cv-primary w-100 py-2 fw-medium"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <>
                         <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <span>Creating Account...</span>
+                        <span>Registering...</span>
                       </>
                     ) : (
-                      <>
-                        <i className="bi bi-person-check-fill"></i>
-                        <span>Register Account</span>
-                      </>
+                      <span>Create Account</span>
                     )}
                   </button>
                 </form>
 
                 {/* Footer Link */}
-                <div className="text-center mt-4 pt-3 border-top border-secondary border-opacity-25">
+                <div className="text-center mt-4 pt-3" style={{ borderTop: '1px solid var(--cv-border-subtle)' }}>
                   <span className="text-secondary small">Already have an account? </span>
-                  <a href="#/login" className="text-purple-light fw-bold text-decoration-none small hover-underline">
-                    Sign In Here
+                  <a href="#/login" className="text-purple-light fw-medium text-decoration-none small">
+                    Sign In
                   </a>
                 </div>
               </div>
