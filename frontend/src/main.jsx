@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import './index.css';
+import './index.css'; //global styling
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

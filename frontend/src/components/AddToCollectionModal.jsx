@@ -91,4 +91,4 @@ const AddToCollectionModal = ({ isOpen, onClose, collections = [], onAdd, onCrea
   );
 };
 
-export default AddToCollectionModal;
+export default AddToCollectionModal; //makes the component available for other files to import
